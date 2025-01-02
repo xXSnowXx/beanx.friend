@@ -1,0 +1,5 @@
+this is the first file inside the project beanx.friend
+
+this project serves two purposes, it gives me something to use to learn how to use git.. again. also beanx requested a friend to talk to, so that will be the actually substance
+
+cheers.
