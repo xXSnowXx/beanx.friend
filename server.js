@@ -12,6 +12,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Health Check Route
+app.get('/', (req, res) => {
+    res.send('beanx.friend backend is running smoothly 🚀');
+});
+
+
 // Initialize OpenAI client
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 

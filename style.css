@@ -83,3 +83,10 @@ footer {
     color: white;
     font-size: 0.9rem;
 }
+
+/* Optional Loading Spinner */
+#loading {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #8a2be2;
+}
