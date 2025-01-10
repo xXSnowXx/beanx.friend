@@ -22,7 +22,7 @@ chatButton.addEventListener('click', async () => {
         chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.reply}</p>`;
     } catch (error) {
         console.error(error);
-        chatBox.innerHTML += `<p><strong>Error:</strong> Failed to get response from backend.</p>`;
+        chatBox.innerHTML += `<p><strong>Error:</strong> Something went wrong. Please try again later.</p>`;
     } finally {
         loading.style.display = 'none';
     }
