@@ -3,39 +3,41 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', Arial, sans-serif;
-    background: linear-gradient(to bottom, #a8b0c5, #d1d6e0);
+    background: linear-gradient(120deg, #d1d6e0, #a8b0c5, #6b7c93);
+    background-size: 400% 400%;
     color: #2c2c54;
     text-align: center;
     overflow-x: hidden;
     position: relative;
+    animation: gradientShift 8s ease infinite;
 }
 
-/* Rain Effect */
-body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 2px 50px;
-    animation: rain 0.8s linear infinite;
-    z-index: 999;
-}
-
-@keyframes rain {
-    0% { background-position: 0 0; }
-    100% { background-position: 0 50px; }
+/* Dynamic Gradient Animation */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Header Styling */
 header {
-    background: linear-gradient(to right, #6b7c93, #a8b0c5);
+    background: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 1.5rem 0;
     font-size: 1.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+header .logo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ff69b4;
+}
+
+header p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #dcd6f7;
 }
 
 /* Main Content */
@@ -98,25 +100,7 @@ button:hover {
 footer {
     margin-top: 2rem;
     padding: 1rem 0;
-    background: linear-gradient(to right, #6b7c93, #a8b0c5);
+    background: rgba(0, 0, 0, 0.8);
     color: white;
     font-size: 0.9rem;
-}
-
-/* Subtle Mood Message */
-footer::after {
-    content: "Some moments feel quieter than others... 🌧️";
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    color: #dcd6f7;
-    font-style: italic;
-}
-
-
-/* Optional Loading Spinner */
-#loading {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #8a2be2;
 }
