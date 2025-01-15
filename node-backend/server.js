@@ -22,18 +22,28 @@ app.get('/', (req, res) => {
 // Initialize OpenAI client
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Chat endpoint
 app.post('/chat', async (req, res) => {
-    const { message } = req.body;
+    const { message, persona } = req.body;
 
     if (!message) {
         return res.status(400).json({ error: 'Message is required' });
     }
 
+    const personaPrompts = {
+        friendly: 'You are a friendly and cheerful AI assistant named Beanx.',
+        serious: 'You are a serious and professional AI assistant named Beanx.',
+        sassy: 'You are a sassy and witty AI assistant named Beanx. Add playful snark to your responses.',
+    };
+
+    const systemMessage = personaPrompts[persona] || personaPrompts['friendly'];
+
     try {
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
-            messages: [{ role: 'user', content: message }],
+            messages: [
+                { role: 'system', content: systemMessage },
+                { role: 'user', content: message },
+            ],
         });
 
         res.json({ reply: response.choices[0].message.content });
@@ -41,9 +51,4 @@ app.post('/chat', async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Failed to connect to OpenAI API' });
     }
-});
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -1,9 +1,10 @@
 const chatButton = document.getElementById('chat-button');
 const userInput = document.getElementById('user-input');
 const chatBox = document.getElementById('chat-box');
-const loading = document.getElementById('loading'); // Optional loading indicator
+const loading = document.getElementById('loading');
+const personaSelect = document.getElementById('persona');
 
-// Function for typewriter effect
+// Function for typewriter effect (already implemented)
 function typeWriterEffect(element, text, delay = 50) {
     let i = 0;
     const interval = setInterval(() => {
@@ -18,6 +19,8 @@ function typeWriterEffect(element, text, delay = 50) {
 
 chatButton.addEventListener('click', async () => {
     const userMessage = userInput.value;
+    const selectedPersona = personaSelect.value;
+
     if (!userMessage) return;
 
     chatBox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
@@ -28,7 +31,7 @@ chatButton.addEventListener('click', async () => {
         const response = await fetch('http://localhost:3000/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userMessage }),
+            body: JSON.stringify({ message: userMessage, persona: selectedPersona }),
         });
 
         const data = await response.json();
@@ -37,7 +40,6 @@ chatButton.addEventListener('click', async () => {
         botMessage.innerHTML = `<strong>Bot:</strong> `;
         chatBox.appendChild(botMessage);
 
-        // Typewriter effect for the bot's reply
         typeWriterEffect(botMessage, data.reply);
     } catch (error) {
         console.error(error);
